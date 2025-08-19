@@ -22,6 +22,8 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .logo {
@@ -259,6 +261,7 @@ body {
 @media (max-width: 768px) {
     .logo {
         gap: 30px;
+        top: 45%;
     }
     
     .logo-icon,
@@ -270,6 +273,11 @@ body {
     .abstract-graphic {
         width: 300px;
         height: 300px;
+        top: 45%;
+    }
+    
+    .abstract-graphic.move-up {
+        top: 15%;
     }
     
     .abstract-graphic::before {
@@ -282,8 +290,13 @@ body {
         height: 150px;
     }
     
+    .coming-soon {
+        top: 75%;
+    }
+    
     .coming-soon h1 {
-        font-size: 36px;
+        font-size: 32px;
+        line-height: 1.2;
     }
     
     .contact-section {
@@ -306,6 +319,7 @@ body {
     .logo {
         gap: 20px;
         flex-direction: column;
+        top: 40%;
     }
     
     .logo-icon,
@@ -317,6 +331,11 @@ body {
     .abstract-graphic {
         width: 250px;
         height: 250px;
+        top: 40%;
+    }
+    
+    .abstract-graphic.move-up {
+        top: 10%;
     }
     
     .abstract-graphic::before {
@@ -329,8 +348,14 @@ body {
         height: 120px;
     }
     
+    .coming-soon {
+        top: 80%;
+    }
+    
     .coming-soon h1 {
-        font-size: 28px;
+        font-size: 24px;
+        line-height: 1.3;
+        padding: 0 20px;
     }
     
     .contact-section {
@@ -346,5 +371,80 @@ body {
     .contact-icon svg {
         width: 16px;
         height: 16px;
+    }
+}
+
+@media (max-width: 360px) {
+    .logo {
+        top: 35%;
+    }
+    
+    .logo-icon,
+    .logo-arabic {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .abstract-graphic {
+        width: 200px;
+        height: 200px;
+        top: 35%;
+    }
+    
+    .abstract-graphic.move-up {
+        top: 8%;
+    }
+    
+    .abstract-graphic::before {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .abstract-graphic::after {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .coming-soon {
+        top: 85%;
+    }
+    
+    .coming-soon h1 {
+        font-size: 20px;
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        height: 100vh;
+        min-height: 100vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+        height: 100vh;
+        min-height: 100vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .logo-arabic {
+        top: -8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-arabic {
+        top: -5px;
+    }
+}
+
+@media (max-width: 360px) {
+    .logo-arabic {
+        top: -3px;
     }
 }
