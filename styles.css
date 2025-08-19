@@ -1,0 +1,229 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f1efe7;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    z-index: 25; /* Higher than ball */
+    opacity: 0; /* Start hidden */
+    transition: opacity 1s ease-in-out;
+}
+
+.logo.fade-in {
+    opacity: 1 !important;
+}
+
+.logo-icon {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+}
+
+.logo-arabic {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    width: 100%;
+}
+
+.abstract-graphic {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20; /* Lower than logos */
+    transition: all 2s ease-in-out;
+}
+
+.abstract-graphic.move-up {
+    top: 20%;
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(0.8);
+}
+
+.abstract-graphic.move-up::before {
+    background: linear-gradient(135deg, 
+        #4db8b8 0%,
+        #66cccc 50%,
+        #80d4d4 100%);
+    opacity: 0.6;
+}
+
+.abstract-graphic.move-up::after {
+    background: linear-gradient(45deg,
+        #66cccc 0%,
+        #4db8b8 100%);
+    opacity: 0.4;
+}
+
+.abstract-graphic::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, 
+        #008080 0%,
+        #006666 50%,
+        #004d4d 100%);
+    border-radius: 50%;
+    box-shadow: 
+        0 20px 40px rgba(0, 128, 128, 0.3),
+        inset 0 10px 20px rgba(255, 255, 255, 0.2);
+    animation: float 6s ease-in-out infinite;
+    transition: all 2s ease-in-out;
+}
+
+.abstract-graphic::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(45deg,
+        #00a3a3 0%,
+        #008080 100%);
+    border-radius: 50%;
+    box-shadow: 
+        0 10px 20px rgba(0, 128, 128, 0.2),
+        inset 0 5px 10px rgba(255, 255, 255, 0.3);
+    animation: float 6s ease-in-out infinite reverse;
+    transition: all 2s ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+    }
+}
+
+.coming-soon {
+    text-align: center;
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30; /* Highest z-index */
+    opacity: 0; /* Start hidden */
+    transition: opacity 1s ease-in-out;
+}
+
+.coming-soon.fade-in {
+    opacity: 1 !important;
+}
+
+.coming-soon h1 {
+    font-size: 32px;
+    font-weight: 400;
+    color: #2c3e50;
+    letter-spacing: -1px;
+    margin: 0;
+    font-family: 'Eastman Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .logo {
+        gap: 30px;
+    }
+    
+    .logo-icon,
+    .logo-arabic {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .abstract-graphic {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .abstract-graphic::before {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .abstract-graphic::after {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .coming-soon h1 {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        gap: 20px;
+        flex-direction: column;
+    }
+    
+    .logo-icon,
+    .logo-arabic {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .abstract-graphic {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .abstract-graphic::before {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .abstract-graphic::after {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .coming-soon h1 {
+        font-size: 28px;
+    }
+}
