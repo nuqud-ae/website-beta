@@ -200,6 +200,45 @@ body {
     }
 }
 
+.contact-section {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 40;
+    text-align: center;
+    opacity: 1;
+    transition: all 0.5s ease-in-out;
+}
+
+.contact-section.animate-in {
+    transform: translateX(-50%) translateY(0);
+}
+
+.contact-link {
+    display: inline-block;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    color: #008080;
+    text-decoration: none;
+    font-family: 'Eastman Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+    border: 2px solid rgba(0, 128, 128, 0.3);
+    filter: drop-shadow(0 0 15px rgba(0, 128, 128, 0.2));
+}
+
+.contact-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(0, 128, 128, 0.6);
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 25px rgba(0, 128, 128, 0.5));
+    color: #00a3a3;
+}
+
 .coming-soon {
     text-align: center;
     position: absolute;
@@ -228,39 +267,6 @@ body {
     font-family: 'Eastman Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-.contact-section {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 40;
-    text-align: center;
-}
-
-.contact-link {
-    display: inline-block;
-    padding: 8px 16px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    color: #008080;
-    text-decoration: none;
-    font-family: 'Eastman Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s ease-in-out;
-    border: 2px solid rgba(0, 128, 128, 0.3);
-    filter: drop-shadow(0 0 15px rgba(0, 128, 128, 0.2));
-}
-
-.contact-link:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(0, 128, 128, 0.6);
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 25px rgba(0, 128, 128, 0.5));
-    color: #00a3a3;
-}
-
 /* Responsive design */
 @media (max-width: 768px) {
     .container {
@@ -271,7 +277,7 @@ body {
     
     .logo {
         gap: 30px;
-        top: 45%;
+        top: 40%;
     }
     
     .logo-icon,
@@ -283,7 +289,7 @@ body {
     .abstract-graphic {
         width: 300px;
         height: 300px;
-        top: 45%;
+        top: 40%;
     }
     
     .abstract-graphic.move-up {
@@ -301,7 +307,7 @@ body {
     }
     
     .coming-soon {
-        top: 75%;
+        top: 70%;
         max-width: 500px;
         padding: 0 15px;
     }
@@ -313,6 +319,7 @@ body {
     
     .contact-section {
         bottom: 20px;
+        transform: translateX(-50%) translateY(15px);
     }
     
     .contact-link {
@@ -331,7 +338,7 @@ body {
     .logo {
         gap: 20px;
         flex-direction: column;
-        top: 40%;
+        top: 35%;
     }
     
     .logo-icon,
@@ -343,11 +350,11 @@ body {
     .abstract-graphic {
         width: 250px;
         height: 250px;
-        top: 40%;
+        top: 35%;
     }
     
     .abstract-graphic.move-up {
-        top: 10%;
+        top: 12%;
     }
     
     .abstract-graphic::before {
@@ -361,7 +368,7 @@ body {
     }
     
     .coming-soon {
-        top: 80%;
+        top: 75%;
         max-width: 400px;
         padding: 0 10px;
     }
@@ -374,6 +381,7 @@ body {
     
     .contact-section {
         bottom: 15px;
+        transform: translateX(-50%) translateY(10px);
     }
     
     .contact-link {
@@ -384,7 +392,7 @@ body {
 
 @media (max-width: 360px) {
     .logo {
-        top: 35%;
+        top: 30%;
     }
     
     .logo-icon,
@@ -396,11 +404,11 @@ body {
     .abstract-graphic {
         width: 200px;
         height: 200px;
-        top: 35%;
+        top: 30%;
     }
     
     .abstract-graphic.move-up {
-        top: 8%;
+        top: 10%;
     }
     
     .abstract-graphic::before {
@@ -414,7 +422,7 @@ body {
     }
     
     .coming-soon {
-        top: 85%;
+        top: 80%;
         max-width: 320px;
         padding: 0 8px;
     }
@@ -426,6 +434,7 @@ body {
     
     .contact-section {
         bottom: 12px;
+        transform: translateX(-50%) translateY(8px);
     }
     
     .contact-link {

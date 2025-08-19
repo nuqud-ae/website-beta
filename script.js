@@ -1,12 +1,13 @@
-// Smooth animation sequence: ball moves up → logos fade in → text fades in
+// Smooth animation sequence: ball moves up → logos fade in → text fades in → contact link appears
 document.addEventListener('DOMContentLoaded', function() {
     const logo = document.querySelector('.logo');
     const logoIcon = document.querySelector('.logo-icon');
     const logoArabic = document.querySelector('.logo-arabic');
     const comingSoon = document.querySelector('.coming-soon');
+    const contactLink = document.querySelector('.contact-link');
     const abstractGraphic = document.querySelector('.abstract-graphic');
     
-    // Initial state - start with logos and text hidden
+    // Initial state - start with logos, text, and contact link hidden
     logo.style.opacity = '0';
     logoIcon.style.opacity = '0';
     logoArabic.style.opacity = '0';
@@ -69,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 logoArabic.classList.add('fade-in');
                 logoArabic.style.opacity = '1';
-            }, 200); // 200ms delay between logos (reduced from 300ms)
+            }, 200); // 200ms delay between logos
             
             // Show the logo container
             logo.style.opacity = '1';
@@ -80,6 +81,11 @@ document.addEventListener('DOMContentLoaded', function() {
             comingSoon.classList.add('fade-in');
             comingSoon.style.opacity = '1';
         }, 1700); // Reduced from 2000ms to 1700ms
+        
+        // Step 4: Contact link appears last
+        setTimeout(() => {
+            contactLink.style.opacity = '1';
+        }, 2200); // Contact link appears 500ms after tagline
         
     }, 700); // Reduced from 1000ms to 700ms
 });
