@@ -13,6 +13,47 @@ document.addEventListener('DOMContentLoaded', function() {
     comingSoon.style.opacity = '0';
     abstractGraphic.style.opacity = '1';
     
+    // Dynamic cursor glow effects
+    document.addEventListener('mousemove', function(e) {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        
+        // Calculate distance from mouse to elements for dynamic glow
+        if (logoIcon.style.opacity === '1') {
+            const logoIconRect = logoIcon.getBoundingClientRect();
+            const logoIconCenterX = logoIconRect.left + logoIconRect.width / 2;
+            const logoIconCenterY = logoIconRect.top + logoIconRect.height / 2;
+            const distance = Math.sqrt((mouseX - logoIconCenterX) ** 2 + (mouseY - logoIconCenterY) ** 2);
+            const maxDistance = 200;
+            const glowIntensity = Math.max(0, 1 - distance / maxDistance);
+            
+            logoIcon.style.filter = `drop-shadow(0 0 ${20 + glowIntensity * 30}px rgba(0, 128, 128, ${0.3 + glowIntensity * 0.5}))`;
+        }
+        
+        if (logoArabic.style.opacity === '1') {
+            const logoArabicRect = logoArabic.getBoundingClientRect();
+            const logoArabicCenterX = logoArabicRect.left + logoArabicRect.width / 2;
+            const logoArabicCenterY = logoArabicRect.top + logoArabicRect.height / 2;
+            const distance = Math.sqrt((mouseX - logoArabicCenterX) ** 2 + (mouseY - logoArabicCenterY) ** 2);
+            const maxDistance = 200;
+            const glowIntensity = Math.max(0, 1 - distance / maxDistance);
+            
+            logoArabic.style.filter = `drop-shadow(0 0 ${20 + glowIntensity * 30}px rgba(0, 128, 128, ${0.3 + glowIntensity * 0.5}))`;
+        }
+        
+        if (abstractGraphic.style.opacity !== '0') {
+            const ballRect = abstractGraphic.getBoundingClientRect();
+            const ballCenterX = ballRect.left + ballRect.width / 2;
+            const ballCenterY = ballRect.top + ballRect.height / 2;
+            const distance = Math.sqrt((mouseX - ballCenterX) ** 2 + (mouseY - ballCenterY) ** 2);
+            const maxDistance = 300;
+            const glowIntensity = Math.max(0, 1 - distance / maxDistance);
+            
+            // Update ball glow based on cursor proximity
+            abstractGraphic.style.setProperty('--glow-intensity', glowIntensity);
+        }
+    });
+    
     // Animation sequence
     setTimeout(() => {
         // Step 1: Ball moves up and fades to lighter gradient
@@ -28,17 +69,17 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 logoArabic.classList.add('fade-in');
                 logoArabic.style.opacity = '1';
-            }, 300); // 300ms delay between logos
+            }, 200); // 200ms delay between logos (reduced from 300ms)
             
             // Show the logo container
             logo.style.opacity = '1';
-        }, 1500);
+        }, 1200); // Reduced from 1500ms to 1200ms
         
         // Step 3: Coming Soon fades in after logos start fading in
         setTimeout(() => {
             comingSoon.classList.add('fade-in');
             comingSoon.style.opacity = '1';
-        }, 2000);
+        }, 1700); // Reduced from 2000ms to 1700ms
         
-    }, 1000); // Start after 1 second
+    }, 700); // Reduced from 1000ms to 700ms
 });
