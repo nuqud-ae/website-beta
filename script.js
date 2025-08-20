@@ -93,4 +93,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1900); // Reduced from 2200ms to 1900ms (300ms faster)
         
     }, 400); // Reduced from 700ms to 400ms
+    
+    // Add smooth scrolling for better UX on mobile
+    if ('scrollBehavior' in document.documentElement.style) {
+        document.documentElement.style.scrollBehavior = 'smooth';
+    }
 });
