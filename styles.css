@@ -35,16 +35,17 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     position: relative;
     padding: 20px;
     box-sizing: border-box;
-    padding-top: 40px;
-    padding-bottom: 40px;
 }
 
 .logo {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,7 +55,6 @@ body {
     transition: opacity 1s ease-in-out;
     width: auto;
     text-align: center;
-    margin-bottom: 40px;
 }
 
 .logo.fade-in {
@@ -113,15 +113,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+    flex: 1;
     width: 100%;
-    padding: 20px 0;
 }
 
 .abstract-graphic {
     width: 400px;
     height: 400px;
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -129,12 +132,12 @@ body {
     transition: all 2s ease-in-out;
     cursor: pointer;
     text-align: center;
-    margin-bottom: 40px;
 }
 
 .abstract-graphic.move-up {
+    top: 20%;
     opacity: 0.3;
-    transform: scale(0.8);
+    transform: translate(-50%, -50%) scale(0.8);
 }
 
 .abstract-graphic.move-up::before {
@@ -213,12 +216,14 @@ body {
 }
 
 .contact-section {
-    position: relative;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 40;
     text-align: center;
     opacity: 1; /* Visible by default, JS will handle animation */
     transition: all 0.5s ease-in-out;
-    margin-top: 20px;
 }
 
 /* Ensure contact link is always visible */
@@ -268,7 +273,10 @@ body {
 
 .coming-soon {
     text-align: center;
-    position: relative;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 30; /* Highest z-index */
     opacity: 0; /* Start hidden */
     transition: opacity 1s ease-in-out;
@@ -276,7 +284,6 @@ body {
     max-width: 600px;
     padding: 0 20px;
     box-sizing: border-box;
-    margin-bottom: 40px;
 }
 
 .coming-soon.fade-in {
@@ -296,13 +303,13 @@ body {
 @media (max-width: 768px) {
     .container {
         padding: 15px;
-        padding-top: 30px;
-        padding-bottom: 30px;
+        height: 100vh;
+        min-height: 100vh;
     }
     
     .logo {
         gap: 30px;
-        margin-bottom: 30px;
+        top: 42%; /* Consistent vertical center */
     }
     
     .logo-icon,
@@ -314,11 +321,11 @@ body {
     .abstract-graphic {
         width: 300px;
         height: 300px;
-        margin-bottom: 30px;
+        top: 42%; /* Same position as logos for alignment */
     }
     
     .abstract-graphic.move-up {
-        transform: scale(0.8);
+        top: 15%;
     }
     
     .abstract-graphic::before {
@@ -332,9 +339,9 @@ body {
     }
     
     .coming-soon {
+        top: 72%; /* Consistent 30% spacing from logos */
         max-width: 500px;
         padding: 0 15px;
-        margin-bottom: 30px;
     }
     
     .coming-soon h1 {
@@ -343,7 +350,7 @@ body {
     }
     
     .contact-section {
-        margin-top: 15px;
+        bottom: 20px;
     }
     
     .contact-link {
@@ -355,14 +362,14 @@ body {
 @media (max-width: 480px) {
     .container {
         padding: 10px;
-        padding-top: 20px;
-        padding-bottom: 20px;
+        height: 100vh;
+        min-height: 100vh;
     }
     
     .logo {
         gap: 15px; /* Reduced gap for stacked layout */
         flex-direction: column;
-        margin-bottom: 25px;
+        top: 38%; /* Consistent center alignment */
     }
     
     .logo-icon,
@@ -374,11 +381,11 @@ body {
     .abstract-graphic {
         width: 250px;
         height: 250px;
-        margin-bottom: 25px;
+        top: 38%; /* Same position as logos */
     }
     
     .abstract-graphic.move-up {
-        transform: scale(0.8);
+        top: 12%;
     }
     
     .abstract-graphic::before {
@@ -392,9 +399,9 @@ body {
     }
     
     .coming-soon {
+        top: 75%; /* Consistent 37% spacing from logos (38% + 37% = 75%) */
         max-width: 400px;
         padding: 0 10px;
-        margin-bottom: 25px;
     }
     
     .coming-soon h1 {
@@ -404,7 +411,7 @@ body {
     }
     
     .contact-section {
-        margin-top: 20px;
+        bottom: 15px;
     }
     
     .contact-link {
@@ -415,8 +422,8 @@ body {
 
 @media (max-width: 360px) {
     .logo {
+        top: 35%; /* Consistent center alignment */
         gap: 12px;
-        margin-bottom: 20px;
     }
     
     .logo-icon,
@@ -428,11 +435,11 @@ body {
     .abstract-graphic {
         width: 200px;
         height: 200px;
-        margin-bottom: 20px;
+        top: 35%; /* Same position as logos */
     }
     
     .abstract-graphic.move-up {
-        transform: scale(0.8);
+        top: 10%;
     }
     
     .abstract-graphic::before {
@@ -446,9 +453,9 @@ body {
     }
     
     .coming-soon {
+        top: 78%; /* Consistent 43% spacing from logos (35% + 43% = 78%) */
         max-width: 320px;
         padding: 0 8px;
-        margin-bottom: 20px;
     }
     
     .coming-soon h1 {
@@ -458,7 +465,7 @@ body {
     }
     
     .contact-section {
-        margin-top: 15px;
+        bottom: 12px;
     }
     
     .contact-link {
@@ -666,7 +673,7 @@ body {
 @media (max-width: 640px) and (min-width: 481px) {
     .logo {
         gap: 25px;
-        margin-bottom: 35px;
+        top: 40%; /* Consistent center alignment */
     }
     
     .logo-icon,
@@ -678,11 +685,11 @@ body {
     .abstract-graphic {
         width: 280px;
         height: 280px;
-        margin-bottom: 35px;
+        top: 40%; /* Same position as logos */
     }
     
     .abstract-graphic.move-up {
-        transform: scale(0.8);
+        top: 14%;
     }
     
     .abstract-graphic::before {
@@ -696,9 +703,9 @@ body {
     }
     
     .coming-soon {
+        top: 72%; /* Consistent 32% spacing from logos (40% + 32% = 72%) */
         max-width: 450px;
         padding: 0 12px;
-        margin-bottom: 35px;
     }
     
     .coming-soon h1 {
@@ -708,7 +715,7 @@ body {
     }
     
     .contact-section {
-        margin-top: 25px;
+        bottom: 18px;
     }
     
     .contact-link {
@@ -774,26 +781,21 @@ body {
 
 /* Landscape orientation fixes */
 @media (max-height: 600px) and (orientation: landscape) {
-    .container {
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
-    
     .logo {
+        top: 35%;
         gap: 20px;
-        margin-bottom: 20px;
     }
     
     .abstract-graphic {
-        margin-bottom: 20px;
+        top: 35%;
     }
     
     .abstract-graphic.move-up {
-        transform: scale(0.8);
+        top: 10%;
     }
     
     .coming-soon {
-        margin-bottom: 20px;
+        top: 80%;
     }
     
     .coming-soon h1 {
@@ -801,20 +803,15 @@ body {
     }
     
     .contact-section {
-        margin-top: 15px;
+        bottom: 10px;
     }
 }
 
 /* Very short screens (like iPhone 12 mini in landscape) */
 @media (max-height: 450px) and (orientation: landscape) {
-    .container {
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-    
     .logo {
+        top: 30%;
         gap: 15px;
-        margin-bottom: 15px;
     }
     
     .logo-icon,
@@ -826,11 +823,11 @@ body {
     .abstract-graphic {
         width: 200px;
         height: 200px;
-        margin-bottom: 15px;
+        top: 30%;
     }
     
     .abstract-graphic.move-up {
-        transform: scale(0.8);
+        top: 8%;
     }
     
     .abstract-graphic::before {
@@ -844,7 +841,7 @@ body {
     }
     
     .coming-soon {
-        margin-bottom: 15px;
+        top: 85%;
     }
     
     .coming-soon h1 {
@@ -853,7 +850,7 @@ body {
     }
     
     .contact-section {
-        margin-top: 10px;
+        bottom: 8px;
     }
     
     .contact-link {
