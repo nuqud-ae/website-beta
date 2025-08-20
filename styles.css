@@ -8,10 +8,19 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background-color: #f1efe7;
     min-height: 100vh;
+    min-height: -webkit-fill-available; /* Safari mobile fix */
     display: flex;
+    display: -webkit-flex;
     align-items: center;
+    -webkit-align-items: center;
     justify-content: center;
+    -webkit-justify-content: center;
     overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    /* Prevent zoom on iOS */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 .container {
@@ -220,6 +229,7 @@ body {
     padding: 8px 16px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 20px;
     color: #008080;
     text-decoration: none;
@@ -267,7 +277,7 @@ body {
     font-family: 'Eastman Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-/* Responsive design */
+/* Responsive design with consistent proportional spacing */
 @media (max-width: 768px) {
     .container {
         padding: 15px;
@@ -277,7 +287,7 @@ body {
     
     .logo {
         gap: 30px;
-        top: 40%;
+        top: 42%; /* Consistent vertical center */
     }
     
     .logo-icon,
@@ -289,7 +299,7 @@ body {
     .abstract-graphic {
         width: 300px;
         height: 300px;
-        top: 40%;
+        top: 42%; /* Same position as logos for alignment */
     }
     
     .abstract-graphic.move-up {
@@ -307,19 +317,18 @@ body {
     }
     
     .coming-soon {
-        top: 70%;
+        top: 72%; /* Consistent 30% spacing from logos */
         max-width: 500px;
         padding: 0 15px;
     }
     
     .coming-soon h1 {
-        font-size: 32px;
+        font-size: 30px;
         line-height: 1.2;
     }
     
     .contact-section {
         bottom: 20px;
-        transform: translateX(-50%) translateY(15px);
     }
     
     .contact-link {
@@ -336,9 +345,9 @@ body {
     }
     
     .logo {
-        gap: 20px;
+        gap: 15px; /* Reduced gap for stacked layout */
         flex-direction: column;
-        top: 35%;
+        top: 38%; /* Consistent center alignment */
     }
     
     .logo-icon,
@@ -350,7 +359,7 @@ body {
     .abstract-graphic {
         width: 250px;
         height: 250px;
-        top: 35%;
+        top: 38%; /* Same position as logos */
     }
     
     .abstract-graphic.move-up {
@@ -368,7 +377,7 @@ body {
     }
     
     .coming-soon {
-        top: 75%;
+        top: 75%; /* Consistent 37% spacing from logos (38% + 37% = 75%) */
         max-width: 400px;
         padding: 0 10px;
     }
@@ -376,12 +385,11 @@ body {
     .coming-soon h1 {
         font-size: 24px;
         line-height: 1.3;
-        padding: 0 20px;
+        padding: 0 15px;
     }
     
     .contact-section {
         bottom: 15px;
-        transform: translateX(-50%) translateY(10px);
     }
     
     .contact-link {
@@ -392,7 +400,8 @@ body {
 
 @media (max-width: 360px) {
     .logo {
-        top: 30%;
+        top: 35%; /* Consistent center alignment */
+        gap: 12px;
     }
     
     .logo-icon,
@@ -404,7 +413,7 @@ body {
     .abstract-graphic {
         width: 200px;
         height: 200px;
-        top: 30%;
+        top: 35%; /* Same position as logos */
     }
     
     .abstract-graphic.move-up {
@@ -422,19 +431,19 @@ body {
     }
     
     .coming-soon {
-        top: 80%;
+        top: 78%; /* Consistent 43% spacing from logos (35% + 43% = 78%) */
         max-width: 320px;
         padding: 0 8px;
     }
     
     .coming-soon h1 {
         font-size: 20px;
-        padding: 0 15px;
+        padding: 0 12px;
+        line-height: 1.3;
     }
     
     .contact-section {
         bottom: 12px;
-        transform: translateX(-50%) translateY(8px);
     }
     
     .contact-link {
@@ -458,5 +467,435 @@ body {
 @media (max-width: 360px) {
     .logo-arabic {
         top: -3px;
+    }
+}
+
+/* Currency Watermark Background */
+.currency-watermarks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.currency-mark {
+    position: absolute;
+    bottom: -100px;
+    opacity: 0.06;
+    animation: fountain-rise 12s ease-in-out infinite;
+    animation-delay: var(--delay);
+    left: var(--position);
+    transform: translateX(-50%);
+}
+
+.currency-mark.dirham-mark {
+    opacity: 0.08;
+    width: 60px;
+    height: 60px;
+    animation-duration: 15s;
+}
+
+.currency-mark.riyal-mark {
+    opacity: 0.07;
+    width: 48px;
+    height: 48px;
+    animation-duration: 14s;
+}
+
+.currency-mark.bahrain-mark,
+.currency-mark.qatar-mark,
+.currency-mark.oman-mark {
+    opacity: 0.05;
+    width: 32px;
+    height: 32px;
+    animation-duration: 13s;
+}
+
+.currency-mark.eur-mark,
+.currency-mark.usd-mark,
+.currency-mark.gbp-mark {
+    opacity: 0.04;
+    width: 24px;
+    height: 24px;
+    animation-duration: 12s;
+}
+
+.currency-icon {
+    width: 100%;
+    height: 100%;
+    filter: brightness(0.7) contrast(0.7);
+    transition: all 0.3s ease-in-out;
+}
+
+@keyframes fountain-rise {
+    0% {
+        transform: translateX(-50%) translateY(0) scale(0.6) rotate(0deg);
+        opacity: 0;
+    }
+    15% {
+        opacity: var(--opacity, 0.06);
+    }
+    85% {
+        opacity: var(--opacity, 0.06);
+    }
+    100% {
+        transform: translateX(-50%) translateY(-120vh) scale(1.4) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Responsive adjustments for currency marks */
+@media (max-width: 768px) {
+    .currency-mark.dirham-mark {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .currency-mark.riyal-mark {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .currency-mark.bahrain-mark,
+    .currency-mark.qatar-mark,
+    .currency-mark.oman-mark {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .currency-mark.eur-mark,
+    .currency-mark.usd-mark,
+    .currency-mark.gbp-mark {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .currency-mark.dirham-mark {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .currency-mark.riyal-mark {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .currency-mark.bahrain-mark,
+    .currency-mark.qatar-mark,
+    .currency-mark.oman-mark {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .currency-mark.eur-mark,
+    .currency-mark.usd-mark,
+    .currency-mark.gbp-mark {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Additional responsive breakpoints for better mobile/tablet support */
+
+/* iPad Pro and large tablets */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .logo-icon,
+    .logo-arabic {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .abstract-graphic {
+        width: 350px;
+        height: 350px;
+    }
+    
+    .abstract-graphic::before {
+        width: 260px;
+        height: 260px;
+    }
+    
+    .abstract-graphic::after {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .coming-soon h1 {
+        font-size: 30px;
+    }
+}
+
+/* Small tablets and large phones in landscape */
+@media (max-width: 640px) and (min-width: 481px) {
+    .logo {
+        gap: 25px;
+        top: 40%; /* Consistent center alignment */
+    }
+    
+    .logo-icon,
+    .logo-arabic {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .abstract-graphic {
+        width: 280px;
+        height: 280px;
+        top: 40%; /* Same position as logos */
+    }
+    
+    .abstract-graphic.move-up {
+        top: 14%;
+    }
+    
+    .abstract-graphic::before {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .abstract-graphic::after {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .coming-soon {
+        top: 72%; /* Consistent 32% spacing from logos (40% + 32% = 72%) */
+        max-width: 450px;
+        padding: 0 12px;
+    }
+    
+    .coming-soon h1 {
+        font-size: 26px;
+        line-height: 1.2;
+        padding: 0 15px;
+    }
+    
+    .contact-section {
+        bottom: 18px;
+    }
+    
+    .contact-link {
+        font-size: 12px;
+        padding: 6px 14px;
+    }
+}
+
+/* iPhone SE and very small phones */
+@media (max-width: 320px) {
+    .logo {
+        top: 32%; /* Consistent center alignment */
+        gap: 10px;
+    }
+    
+    .logo-icon,
+    .logo-arabic {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .abstract-graphic {
+        width: 180px;
+        height: 180px;
+        top: 32%; /* Same position as logos */
+    }
+    
+    .abstract-graphic.move-up {
+        top: 8%;
+    }
+    
+    .abstract-graphic::before {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .abstract-graphic::after {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .coming-soon {
+        top: 80%; /* Consistent 48% spacing from logos (32% + 48% = 80%) */
+        max-width: 280px;
+        padding: 0 8px;
+    }
+    
+    .coming-soon h1 {
+        font-size: 18px;
+        padding: 0 10px;
+        line-height: 1.3;
+    }
+    
+    .contact-section {
+        bottom: 10px;
+    }
+    
+    .contact-link {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+}
+
+/* Landscape orientation fixes */
+@media (max-height: 600px) and (orientation: landscape) {
+    .logo {
+        top: 35%;
+        gap: 20px;
+    }
+    
+    .abstract-graphic {
+        top: 35%;
+    }
+    
+    .abstract-graphic.move-up {
+        top: 10%;
+    }
+    
+    .coming-soon {
+        top: 80%;
+    }
+    
+    .coming-soon h1 {
+        font-size: 22px;
+    }
+    
+    .contact-section {
+        bottom: 10px;
+    }
+}
+
+/* Very short screens (like iPhone 12 mini in landscape) */
+@media (max-height: 450px) and (orientation: landscape) {
+    .logo {
+        top: 30%;
+        gap: 15px;
+    }
+    
+    .logo-icon,
+    .logo-arabic {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .abstract-graphic {
+        width: 200px;
+        height: 200px;
+        top: 30%;
+    }
+    
+    .abstract-graphic.move-up {
+        top: 8%;
+    }
+    
+    .abstract-graphic::before {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .abstract-graphic::after {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .coming-soon {
+        top: 85%;
+    }
+    
+    .coming-soon h1 {
+        font-size: 18px;
+        line-height: 1.2;
+    }
+    
+    .contact-section {
+        bottom: 8px;
+    }
+    
+    .contact-link {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+}
+
+/* Currency watermarks responsive for additional breakpoints */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .currency-mark.dirham-mark {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .currency-mark.riyal-mark {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .currency-mark.bahrain-mark,
+    .currency-mark.qatar-mark,
+    .currency-mark.oman-mark {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .currency-mark.eur-mark,
+    .currency-mark.usd-mark,
+    .currency-mark.gbp-mark {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (max-width: 640px) and (min-width: 481px) {
+    .currency-mark.dirham-mark {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .currency-mark.riyal-mark {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .currency-mark.bahrain-mark,
+    .currency-mark.qatar-mark,
+    .currency-mark.oman-mark {
+        width: 26px;
+        height: 26px;
+    }
+    
+    .currency-mark.eur-mark,
+    .currency-mark.usd-mark,
+    .currency-mark.gbp-mark {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (max-width: 320px) {
+    .currency-mark.dirham-mark {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .currency-mark.riyal-mark {
+        width: 26px;
+        height: 26px;
+    }
+    
+    .currency-mark.bahrain-mark,
+    .currency-mark.qatar-mark,
+    .currency-mark.oman-mark {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .currency-mark.eur-mark,
+    .currency-mark.usd-mark,
+    .currency-mark.gbp-mark {
+        width: 14px;
+        height: 14px;
     }
 }

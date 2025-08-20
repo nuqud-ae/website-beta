@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no">
     <title>nuqud</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +15,41 @@
 </head>
 <body>
     <div class="container">
+        <div class="currency-watermarks">
+            <!-- UAE Dirham (most prominent) -->
+            <div class="currency-mark dirham-mark" style="--delay: 0s; --position: 50%">
+                <img src="currency-dirham.svg" alt="UAE Dirham" class="currency-icon">
+            </div>
+            <!-- Saudi Riyal (second most prominent) -->
+            <div class="currency-mark riyal-mark" style="--delay: 0.5s; --position: 45%">
+                <img src="currency-riyal.svg" alt="Saudi Riyal" class="currency-icon">
+            </div>
+            <!-- Bahrain Dinar -->
+            <div class="currency-mark bahrain-mark" style="--delay: 1s; --position: 35%">
+                <img src="currency-bahrain.svg" alt="Bahrain Dinar" class="currency-icon">
+            </div>
+            <!-- Qatar Riyal -->
+            <div class="currency-mark qatar-mark" style="--delay: 1.5s; --position: 65%">
+                <img src="currency-qatar.svg" alt="Qatar Riyal" class="currency-icon">
+            </div>
+            <!-- Oman Rial -->
+            <div class="currency-mark oman-mark" style="--delay: 2s; --position: 25%">
+                <img src="currency-oman.svg" alt="Oman Rial" class="currency-icon">
+            </div>
+            <!-- Euro -->
+            <div class="currency-mark eur-mark" style="--delay: 2.5s; --position: 75%">
+                <img src="currency-eur.svg" alt="Euro" class="currency-icon">
+            </div>
+            <!-- US Dollar -->
+            <div class="currency-mark usd-mark" style="--delay: 3s; --position: 15%">
+                <img src="currency-usd.svg" alt="US Dollar" class="currency-icon">
+            </div>
+            <!-- British Pound -->
+            <div class="currency-mark gbp-mark" style="--delay: 3.5s; --position: 85%">
+                <img src="currency-gbp.svg" alt="British Pound" class="currency-icon">
+            </div>
+        </div>
+        
         <header class="logo">
             <img src="logo.png" alt="Nuqud AE Logo" class="logo-icon">
             <img src="logo-arabic.png" alt="Nuqud Arabic Logo" class="logo-arabic">
