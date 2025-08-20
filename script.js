@@ -98,4 +98,44 @@ document.addEventListener('DOMContentLoaded', function() {
     if ('scrollBehavior' in document.documentElement.style) {
         document.documentElement.style.scrollBehavior = 'smooth';
     }
+    
+    // Smart scroll detection - only enable scrolling when needed
+    function checkScrollNeeded() {
+        const body = document.body;
+        const container = document.querySelector('.container');
+        const viewportHeight = window.innerHeight;
+        const containerHeight = container.scrollHeight;
+        const isMobile = window.innerWidth <= 768;
+        
+        // On mobile, always check for overflow
+        // On desktop, only enable if there's significant overflow
+        const overflowThreshold = isMobile ? 0 : 50; // 50px threshold for desktop
+        
+        if (containerHeight > (viewportHeight + overflowThreshold)) {
+            // Content overflows - enable scrolling
+            body.classList.remove('scroll-disabled');
+            body.classList.add('scroll-enabled');
+            container.classList.remove('scroll-not-needed');
+            container.classList.add('scroll-needed');
+        } else {
+            // Content fits - disable scrolling
+            body.classList.remove('scroll-enabled');
+            body.classList.add('scroll-disabled');
+            container.classList.remove('scroll-needed');
+            container.classList.add('scroll-not-needed');
+        }
+    }
+    
+    // Check scroll need on load
+    checkScrollNeeded();
+    
+    // Debounced resize handler to prevent excessive checking
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(checkScrollNeeded, 150);
+    });
+    
+    // Check scroll need after animations complete
+    setTimeout(checkScrollNeeded, 2500); // After all animations finish
 });

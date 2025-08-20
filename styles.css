@@ -22,6 +22,7 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    overflow-y: hidden; /* Start with no vertical scroll */
     -webkit-overflow-scrolling: touch;
     /* Prevent zoom on iOS */
     -webkit-text-size-adjust: 100%;
@@ -547,6 +548,45 @@ body {
     /* Prevent scroll interference */
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+}
+
+/* Smart scroll detection classes */
+body.scroll-enabled {
+    overflow-y: auto;
+    /* Smooth scrollbar appearance */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 128, 128, 0.3) transparent;
+}
+
+body.scroll-disabled {
+    overflow-y: hidden;
+}
+
+/* Webkit scrollbar styling */
+body.scroll-enabled::-webkit-scrollbar {
+    width: 8px;
+}
+
+body.scroll-enabled::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+body.scroll-enabled::-webkit-scrollbar-thumb {
+    background: rgba(0, 128, 128, 0.3);
+    border-radius: 4px;
+}
+
+body.scroll-enabled::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 128, 128, 0.5);
+}
+
+/* Container states for scroll detection */
+.container.scroll-needed {
+    min-height: 100vh;
+}
+
+.container.scroll-not-needed {
+    height: 100vh;
 }
 
 .currency-mark {
