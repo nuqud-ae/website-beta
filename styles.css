@@ -19,13 +19,8 @@ body {
     background-color: #f1efe7;
     min-height: 100vh;
     min-height: -webkit-fill-available; /* Safari mobile fix */
-    display: flex;
-    display: -webkit-flex;
-    align-items: center;
-    -webkit-align-items: center;
-    justify-content: center;
-    -webkit-justify-content: center;
-    overflow-y: auto;
+    margin: 0;
+    padding: 0;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     /* Prevent zoom on iOS */
@@ -40,18 +35,16 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     position: relative;
     padding: 20px;
     box-sizing: border-box;
-    padding-bottom: 120px; /* Extra space for contact section */
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 .logo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,6 +54,7 @@ body {
     transition: opacity 1s ease-in-out;
     width: auto;
     text-align: center;
+    margin-bottom: 40px;
 }
 
 .logo.fade-in {
@@ -119,20 +113,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    flex: 1;
+    justify-content: flex-start;
     width: 100%;
-    min-height: 100vh;
     padding: 20px 0;
 }
 
 .abstract-graphic {
     width: 400px;
     height: 400px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -140,12 +129,12 @@ body {
     transition: all 2s ease-in-out;
     cursor: pointer;
     text-align: center;
+    margin-bottom: 40px;
 }
 
 .abstract-graphic.move-up {
-    top: 20%;
     opacity: 0.3;
-    transform: translate(-50%, -50%) scale(0.8);
+    transform: scale(0.8);
 }
 
 .abstract-graphic.move-up::before {
@@ -224,14 +213,12 @@ body {
 }
 
 .contact-section {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
     z-index: 40;
     text-align: center;
     opacity: 1; /* Visible by default, JS will handle animation */
     transition: all 0.5s ease-in-out;
+    margin-top: 20px;
 }
 
 /* Ensure contact link is always visible */
@@ -281,10 +268,7 @@ body {
 
 .coming-soon {
     text-align: center;
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
     z-index: 30; /* Highest z-index */
     opacity: 0; /* Start hidden */
     transition: opacity 1s ease-in-out;
@@ -292,6 +276,7 @@ body {
     max-width: 600px;
     padding: 0 20px;
     box-sizing: border-box;
+    margin-bottom: 40px;
 }
 
 .coming-soon.fade-in {
@@ -311,13 +296,13 @@ body {
 @media (max-width: 768px) {
     .container {
         padding: 15px;
-        height: 100vh;
-        min-height: 100vh;
+        padding-top: 30px;
+        padding-bottom: 30px;
     }
     
     .logo {
         gap: 30px;
-        top: 42%; /* Consistent vertical center */
+        margin-bottom: 30px;
     }
     
     .logo-icon,
@@ -329,11 +314,11 @@ body {
     .abstract-graphic {
         width: 300px;
         height: 300px;
-        top: 42%; /* Same position as logos for alignment */
+        margin-bottom: 30px;
     }
     
     .abstract-graphic.move-up {
-        top: 15%;
+        transform: scale(0.8);
     }
     
     .abstract-graphic::before {
@@ -347,9 +332,9 @@ body {
     }
     
     .coming-soon {
-        top: 72%; /* Consistent 30% spacing from logos */
         max-width: 500px;
         padding: 0 15px;
+        margin-bottom: 30px;
     }
     
     .coming-soon h1 {
@@ -358,7 +343,7 @@ body {
     }
     
     .contact-section {
-        bottom: 20px;
+        margin-top: 15px;
     }
     
     .contact-link {
@@ -370,17 +355,14 @@ body {
 @media (max-width: 480px) {
     .container {
         padding: 10px;
-        min-height: 100vh;
-        padding-bottom: 100px;
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
     
     .logo {
         gap: 15px; /* Reduced gap for stacked layout */
         flex-direction: column;
-        position: relative;
-        top: auto;
-        margin-top: 60px;
-        transform: none;
+        margin-bottom: 25px;
     }
     
     .logo-icon,
@@ -392,14 +374,10 @@ body {
     .abstract-graphic {
         width: 250px;
         height: 250px;
-        position: relative;
-        top: auto;
-        margin-top: 40px;
-        transform: none;
+        margin-bottom: 25px;
     }
     
     .abstract-graphic.move-up {
-        margin-top: 20px;
         transform: scale(0.8);
     }
     
@@ -414,12 +392,9 @@ body {
     }
     
     .coming-soon {
-        position: relative;
-        top: auto;
-        margin-top: 40px;
-        transform: none;
         max-width: 400px;
         padding: 0 10px;
+        margin-bottom: 25px;
     }
     
     .coming-soon h1 {
@@ -429,10 +404,7 @@ body {
     }
     
     .contact-section {
-        position: relative;
-        bottom: auto;
-        margin-top: 40px;
-        transform: none;
+        margin-top: 20px;
     }
     
     .contact-link {
@@ -443,11 +415,8 @@ body {
 
 @media (max-width: 360px) {
     .logo {
-        position: relative;
-        top: auto;
         gap: 12px;
-        margin-top: 40px;
-        transform: none;
+        margin-bottom: 20px;
     }
     
     .logo-icon,
@@ -459,14 +428,10 @@ body {
     .abstract-graphic {
         width: 200px;
         height: 200px;
-        position: relative;
-        top: auto;
-        margin-top: 30px;
-        transform: none;
+        margin-bottom: 20px;
     }
     
     .abstract-graphic.move-up {
-        margin-top: 15px;
         transform: scale(0.8);
     }
     
@@ -481,12 +446,9 @@ body {
     }
     
     .coming-soon {
-        position: relative;
-        top: auto;
-        margin-top: 30px;
-        transform: none;
         max-width: 320px;
         padding: 0 8px;
+        margin-bottom: 20px;
     }
     
     .coming-soon h1 {
@@ -496,10 +458,7 @@ body {
     }
     
     .contact-section {
-        position: relative;
-        bottom: auto;
-        margin-top: 30px;
-        transform: none;
+        margin-top: 15px;
     }
     
     .contact-link {
@@ -707,7 +666,7 @@ body {
 @media (max-width: 640px) and (min-width: 481px) {
     .logo {
         gap: 25px;
-        top: 40%; /* Consistent center alignment */
+        margin-bottom: 35px;
     }
     
     .logo-icon,
@@ -719,11 +678,11 @@ body {
     .abstract-graphic {
         width: 280px;
         height: 280px;
-        top: 40%; /* Same position as logos */
+        margin-bottom: 35px;
     }
     
     .abstract-graphic.move-up {
-        top: 14%;
+        transform: scale(0.8);
     }
     
     .abstract-graphic::before {
@@ -737,9 +696,9 @@ body {
     }
     
     .coming-soon {
-        top: 72%; /* Consistent 32% spacing from logos (40% + 32% = 72%) */
         max-width: 450px;
         padding: 0 12px;
+        margin-bottom: 35px;
     }
     
     .coming-soon h1 {
@@ -749,7 +708,7 @@ body {
     }
     
     .contact-section {
-        bottom: 18px;
+        margin-top: 25px;
     }
     
     .contact-link {
@@ -815,21 +774,26 @@ body {
 
 /* Landscape orientation fixes */
 @media (max-height: 600px) and (orientation: landscape) {
+    .container {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    
     .logo {
-        top: 35%;
         gap: 20px;
+        margin-bottom: 20px;
     }
     
     .abstract-graphic {
-        top: 35%;
+        margin-bottom: 20px;
     }
     
     .abstract-graphic.move-up {
-        top: 10%;
+        transform: scale(0.8);
     }
     
     .coming-soon {
-        top: 80%;
+        margin-bottom: 20px;
     }
     
     .coming-soon h1 {
@@ -837,15 +801,20 @@ body {
     }
     
     .contact-section {
-        bottom: 10px;
+        margin-top: 15px;
     }
 }
 
 /* Very short screens (like iPhone 12 mini in landscape) */
 @media (max-height: 450px) and (orientation: landscape) {
+    .container {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    
     .logo {
-        top: 30%;
         gap: 15px;
+        margin-bottom: 15px;
     }
     
     .logo-icon,
@@ -857,11 +826,11 @@ body {
     .abstract-graphic {
         width: 200px;
         height: 200px;
-        top: 30%;
+        margin-bottom: 15px;
     }
     
     .abstract-graphic.move-up {
-        top: 8%;
+        transform: scale(0.8);
     }
     
     .abstract-graphic::before {
@@ -875,7 +844,7 @@ body {
     }
     
     .coming-soon {
-        top: 85%;
+        margin-bottom: 15px;
     }
     
     .coming-soon h1 {
@@ -884,7 +853,7 @@ body {
     }
     
     .contact-section {
-        bottom: 8px;
+        margin-top: 10px;
     }
     
     .contact-link {
