@@ -124,9 +124,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if any content extends beyond the viewport
         const contentOverflows = maxBottom > viewportHeight;
         
-        // On mobile, be more lenient with overflow detection
-        // On desktop, only enable if there's clear overflow
-        const shouldEnableScroll = isMobile ? contentOverflows : (contentOverflows && (maxBottom > viewportHeight + 20));
+        // Check if contact button would be cut off
+        const contactButton = contactSection ? contactSection.getBoundingClientRect() : null;
+        const contactButtonCutOff = contactButton ? (contactButton.bottom > viewportHeight) : false;
+        
+        // On mobile, be VERY conservative - only enable scroll if absolutely necessary
+        // On desktop, only enable if there's significant overflow
+        const shouldEnableScroll = isMobile ? 
+            (contentOverflows && (maxBottom > viewportHeight + 100)) : // 100px threshold for mobile
+            (contentOverflows && (maxBottom > viewportHeight + 50));  // 50px threshold for desktop
         
         if (shouldEnableScroll) {
             // Content overflows - enable scrolling
@@ -148,7 +154,10 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Viewport height:', viewportHeight);
         console.log('Max content bottom:', maxBottom);
         console.log('Content overflows:', contentOverflows);
+        console.log('Contact button cut off:', contactButtonCutOff);
         console.log('Is mobile:', isMobile);
+        console.log('Should enable scroll:', shouldEnableScroll);
+        console.log('Mobile threshold:', isMobile ? '100px' : '50px');
     }
     
     // Force initial scroll state - disabled by default
