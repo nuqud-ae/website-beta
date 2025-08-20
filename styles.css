@@ -242,18 +242,18 @@ body {
     
     /* Responsive blue ball sizing for mobile */
     .abstract-graphic {
-        width: 280px;
-        height: 280px;
+        width: 200px;
+        height: 200px;
     }
     
     .abstract-graphic::before {
-        width: 210px;
-        height: 210px;
+        width: 150px;
+        height: 150px;
     }
     
     .abstract-graphic::after {
-        width: 140px;
-        height: 140px;
+        width: 100px;
+        height: 100px;
     }
     
     /* Better touch targets for mobile */
@@ -315,18 +315,18 @@ body {
     
     /* Even smaller blue ball for very small screens */
     .abstract-graphic {
-        width: 240px;
-        height: 240px;
+        width: 160px;
+        height: 160px;
     }
     
     .abstract-graphic::before {
-        width: 180px;
-        height: 180px;
+        width: 120px;
+        height: 120px;
     }
     
     .abstract-graphic::after {
-        width: 120px;
-        height: 120px;
+        width: 80px;
+        height: 80px;
     }
 }
 
