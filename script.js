@@ -94,5 +94,90 @@ document.addEventListener('DOMContentLoaded', function() {
         
     }, 400); // Reduced from 700ms to 400ms
     
+    // Enhanced interactive features
+    addInteractiveFeatures();
+    
     // Simple approach - no scrolling needed since all content fits in viewport
 });
+
+// Enhanced interactive features function
+function addInteractiveFeatures() {
+    const abstractGraphic = document.querySelector('.abstract-graphic');
+    const logos = document.querySelectorAll('.logo-icon, .logo-arabic');
+    
+    // Enhanced ball interactions
+    if (abstractGraphic) {
+        // Add click interaction for the ball
+        abstractGraphic.addEventListener('click', function() {
+            this.style.animationPlayState = this.style.animationPlayState === 'paused' ? 'running' : 'paused';
+        });
+        
+        // Add touch gesture support for mobile
+        let touchStartY = 0;
+        let touchEndY = 0;
+        
+        abstractGraphic.addEventListener('touchstart', function(e) {
+            touchStartY = e.touches[0].clientY;
+        });
+        
+        abstractGraphic.addEventListener('touchend', function(e) {
+            touchEndY = e.changedTouches[0].clientY;
+            const swipeDistance = touchStartY - touchEndY;
+            
+            if (Math.abs(swipeDistance) > 50) {
+                if (swipeDistance > 0) {
+                    // Swipe up - enhance glow
+                    this.style.setProperty('--glow-intensity', '1');
+                    setTimeout(() => {
+                        this.style.setProperty('--glow-intensity', '0');
+                    }, 1000);
+                } else {
+                    // Swipe down - pause animation
+                    this.style.animationPlayState = 'paused';
+                    setTimeout(() => {
+                        this.style.animationPlayState = 'running';
+                    }, 2000);
+                }
+            }
+        });
+    }
+    
+    // Enhanced logo interactions
+    logos.forEach(logo => {
+        // Add click interaction
+        logo.addEventListener('click', function() {
+            this.style.transform = 'scale(1.1) rotate(5deg)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 300);
+        });
+        
+        // Add touch feedback
+        logo.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.95)';
+        });
+        
+        logo.addEventListener('touchend', function() {
+            this.style.transform = '';
+        });
+    });
+    
+    // Add keyboard navigation support
+    document.addEventListener('keydown', function(e) {
+        switch(e.key) {
+            case ' ':
+            case 'Enter':
+                e.preventDefault();
+                if (abstractGraphic) {
+                    abstractGraphic.click();
+                }
+                break;
+            case 'Escape':
+                // Reset all animations
+                if (abstractGraphic) {
+                    abstractGraphic.style.animationPlayState = 'running';
+                }
+                break;
+        }
+    });
+}

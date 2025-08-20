@@ -70,6 +70,7 @@ body {
     transition: all 1.5s ease-in-out;
     filter: drop-shadow(0 0 20px rgba(0, 128, 128, 0.3));
     cursor: pointer;
+    will-change: transform, opacity, filter;
 }
 
 .logo-icon.fade-in {
@@ -80,8 +81,9 @@ body {
 
 .logo-icon:hover {
     filter: drop-shadow(0 0 40px rgba(0, 128, 128, 0.8));
-    transform: scale(1.05);
+    transform: scale(1.05) rotate(2deg);
     transition: all 0.3s ease-in-out;
+    will-change: transform, filter;
 }
 
 .logo-arabic {
@@ -95,6 +97,7 @@ body {
     position: relative;
     top: -10px; /* Move Arabic logo up to align with English logo */
     cursor: pointer;
+    will-change: transform, opacity, filter;
 }
 
 .logo-arabic.fade-in {
@@ -105,8 +108,9 @@ body {
 
 .logo-arabic:hover {
     filter: drop-shadow(0 0 40px rgba(0, 128, 128, 0.8));
-    transform: scale(1.05);
+    transform: scale(1.05) rotate(-2deg);
     transition: all 0.3s ease-in-out;
+    will-change: transform, filter;
 }
 
 .main-content {
@@ -171,6 +175,7 @@ body {
     animation: float 6s ease-in-out infinite;
     transition: all 2s ease-in-out;
     --glow-intensity: 0;
+    will-change: transform, box-shadow;
 }
 
 .abstract-graphic::after {
@@ -188,6 +193,7 @@ body {
     animation: float 6s ease-in-out infinite reverse;
     transition: all 2s ease-in-out;
     --glow-intensity: 0;
+    will-change: transform, box-shadow;
 }
 
 .abstract-graphic:hover::before {
@@ -196,6 +202,7 @@ body {
         inset 0 15px 30px rgba(255, 255, 255, 0.3);
     transform: scale(1.1);
     transition: all 0.3s ease-in-out;
+    will-change: transform, box-shadow;
 }
 
 .abstract-graphic:hover::after {
@@ -204,6 +211,7 @@ body {
         inset 0 8px 15px rgba(255, 255, 255, 0.4);
     transform: scale(1.1);
     transition: all 0.3s ease-in-out;
+    will-change: transform, box-shadow;
 }
 
 @keyframes float {
@@ -226,10 +234,35 @@ body {
     transition: all 0.5s ease-in-out;
 }
 
-/* Simple mobile positioning */
+/* Enhanced mobile experience */
 @media (max-width: 768px) {
     .contact-section {
         bottom: 20px;
+    }
+    
+    /* Better touch targets for mobile */
+    .logo-icon,
+    .logo-arabic {
+        min-height: 44px; /* iOS touch target minimum */
+        min-width: 44px;
+    }
+    
+    .abstract-graphic {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Enhanced mobile hover states */
+    .logo-icon:active,
+    .logo-arabic:active {
+        transform: scale(0.98);
+        transition: all 0.1s ease-in-out;
+    }
+    
+    .abstract-graphic:active::before,
+    .abstract-graphic:active::after {
+        transform: scale(0.95);
+        transition: all 0.1s ease-in-out;
     }
 }
 
@@ -290,6 +323,7 @@ body {
     max-width: 600px;
     padding: 0 20px;
     box-sizing: border-box;
+    will-change: opacity, transform;
 }
 
 .coming-soon.fade-in {
@@ -637,8 +671,13 @@ body {
         transform: translateX(-50%) translateY(0) scale(0.5) rotate(0deg) translateZ(0);
         opacity: 0;
     }
-    20% {
+    15% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20vh) scale(0.8) rotate(90deg) translateZ(0);
+    }
+    25% {
         opacity: var(--opacity, 0.06);
+        transform: translateX(-50%) translateY(-40vh) scale(1.0) rotate(180deg) translateZ(0);
     }
     80% {
         opacity: var(--opacity, 0.06);
