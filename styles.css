@@ -240,6 +240,22 @@ body {
         bottom: 20px;
     }
     
+    /* Responsive blue ball sizing for mobile */
+    .abstract-graphic {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .abstract-graphic::before {
+        width: 210px;
+        height: 210px;
+    }
+    
+    .abstract-graphic::after {
+        width: 140px;
+        height: 140px;
+    }
+    
     /* Better touch targets for mobile */
     .logo-icon,
     .logo-arabic {
@@ -286,7 +302,7 @@ body {
     font-family: 'Eastman Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-/* Simple mobile positioning */
+/* Extra small mobile devices */
 @media (max-width: 480px) {
     .contact-section {
         bottom: 15px;
@@ -295,6 +311,22 @@ body {
     .contact-link {
         padding: 10px 20px;
         font-size: 13px;
+    }
+    
+    /* Even smaller blue ball for very small screens */
+    .abstract-graphic {
+        width: 240px;
+        height: 240px;
+    }
+    
+    .abstract-graphic::before {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .abstract-graphic::after {
+        width: 120px;
+        height: 120px;
     }
 }
 
