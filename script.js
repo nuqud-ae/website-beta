@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
     logoIcon.style.opacity = '0';
     logoArabic.style.opacity = '0';
     comingSoon.style.opacity = '0';
+    if (contactLink) {
+        contactLink.style.opacity = '0';
+    }
     abstractGraphic.style.opacity = '1';
     
     // Dynamic cursor glow effects
@@ -74,18 +77,20 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Show the logo container
             logo.style.opacity = '1';
-        }, 1200); // Reduced from 1500ms to 1200ms
+        }, 900); // Reduced from 1200ms to 900ms (300ms faster)
         
         // Step 3: Coming Soon fades in after logos start fading in
         setTimeout(() => {
             comingSoon.classList.add('fade-in');
             comingSoon.style.opacity = '1';
-        }, 1700); // Reduced from 2000ms to 1700ms
+        }, 1400); // Reduced from 1700ms to 1400ms (300ms faster)
         
         // Step 4: Contact link appears last
         setTimeout(() => {
-            contactLink.style.opacity = '1';
-        }, 2200); // Contact link appears 500ms after tagline
+            if (contactLink) {
+                contactLink.style.opacity = '1';
+            }
+        }, 1900); // Reduced from 2200ms to 1900ms (300ms faster)
         
-    }, 700); // Reduced from 1000ms to 700ms
+    }, 400); // Reduced from 700ms to 400ms
 });

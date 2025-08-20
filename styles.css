@@ -216,8 +216,27 @@ body {
     transform: translateX(-50%);
     z-index: 40;
     text-align: center;
-    opacity: 1;
+    opacity: 1; /* Visible by default, JS will handle animation */
     transition: all 0.5s ease-in-out;
+}
+
+/* Ensure contact link is always visible */
+.contact-link {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 128, 128, 0.3);
+    filter: none;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    text-shadow: none;
 }
 
 .contact-section.animate-in {
@@ -237,16 +256,13 @@ body {
     font-size: 14px;
     font-weight: 500;
     transition: all 0.3s ease-in-out;
-    border: 2px solid rgba(0, 128, 128, 0.3);
-    filter: drop-shadow(0 0 15px rgba(0, 128, 128, 0.2));
+    /* Removed border and filter to eliminate fuzziness */
 }
 
 .contact-link:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(0, 128, 128, 0.6);
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 25px rgba(0, 128, 128, 0.5));
-    color: #00a3a3;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(0, 128, 128, 0.5);
+    transform: scale(1.01);
 }
 
 .coming-soon {
@@ -484,44 +500,50 @@ body {
 
 .currency-mark {
     position: absolute;
-    bottom: -100px;
+    bottom: -120px;
     opacity: 0.06;
-    animation: fountain-rise 12s ease-in-out infinite;
+    animation: fountain-rise 15s ease-in-out infinite;
     animation-delay: var(--delay);
     left: var(--position);
     transform: translateX(-50%);
+    /* Prevent overlap with generous spacing */
+    margin: 0 20px;
 }
 
 .currency-mark.dirham-mark {
     opacity: 0.08;
-    width: 60px;
-    height: 60px;
-    animation-duration: 15s;
+    width: 70px;
+    height: 70px;
+    animation-duration: 18s;
+    z-index: 5;
 }
 
 .currency-mark.riyal-mark {
     opacity: 0.07;
-    width: 48px;
-    height: 48px;
-    animation-duration: 14s;
+    width: 55px;
+    height: 55px;
+    animation-duration: 17s;
+    z-index: 4;
 }
 
 .currency-mark.bahrain-mark,
 .currency-mark.qatar-mark,
 .currency-mark.oman-mark {
     opacity: 0.05;
-    width: 32px;
-    height: 32px;
-    animation-duration: 13s;
+    width: 38px;
+    height: 38px;
+    animation-duration: 16s;
+    z-index: 3;
 }
 
 .currency-mark.eur-mark,
 .currency-mark.usd-mark,
 .currency-mark.gbp-mark {
     opacity: 0.04;
-    width: 24px;
-    height: 24px;
-    animation-duration: 12s;
+    width: 28px;
+    height: 28px;
+    animation-duration: 15s;
+    z-index: 2;
 }
 
 .currency-icon {
@@ -533,17 +555,17 @@ body {
 
 @keyframes fountain-rise {
     0% {
-        transform: translateX(-50%) translateY(0) scale(0.6) rotate(0deg);
+        transform: translateX(-50%) translateY(0) scale(0.5) rotate(0deg);
         opacity: 0;
     }
-    15% {
+    20% {
         opacity: var(--opacity, 0.06);
     }
-    85% {
+    80% {
         opacity: var(--opacity, 0.06);
     }
     100% {
-        transform: translateX(-50%) translateY(-120vh) scale(1.4) rotate(360deg);
+        transform: translateX(-50%) translateY(-140vh) scale(1.6) rotate(360deg);
         opacity: 0;
     }
 }
