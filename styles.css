@@ -27,6 +27,9 @@ body {
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    /* Ensure smooth scrolling without interfering with background animations */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 .container {
@@ -492,7 +495,7 @@ body {
     }
 }
 
-/* Currency Watermark Background */
+/* Currency Watermark Background - Isolated Layer */
 .currency-watermarks {
     position: fixed;
     top: 0;
@@ -502,6 +505,19 @@ body {
     pointer-events: none;
     z-index: 1;
     overflow: hidden;
+    /* Create isolated stacking context */
+    isolation: isolate;
+    /* Ensure animations are not affected by scrolling */
+    will-change: transform;
+    /* Hardware acceleration for smooth animations */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    /* Prevent any scroll interference */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* Force GPU layer */
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
 }
 
 /* Ensure content is above watermarks on mobile */
@@ -514,6 +530,25 @@ body {
     }
 }
 
+/* Additional isolation for currency animations */
+.currency-mark.dirham-mark,
+.currency-mark.riyal-mark,
+.currency-mark.bahrain-mark,
+.currency-mark.qatar-mark,
+.currency-mark.oman-mark,
+.currency-mark.eur-mark,
+.currency-mark.usd-mark,
+.currency-mark.gbp-mark {
+    /* Force GPU acceleration and isolation */
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    /* Ensure animations run independently */
+    animation-play-state: running;
+    /* Prevent scroll interference */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
 .currency-mark {
     position: absolute;
     bottom: -120px;
@@ -524,6 +559,13 @@ body {
     transform: translateX(-50%);
     /* Prevent overlap with generous spacing */
     margin: 0 20px;
+    /* Isolate from scrolling interference */
+    will-change: transform, opacity;
+    /* Hardware acceleration */
+    transform: translateX(-50%) translateZ(0);
+    -webkit-transform: translateX(-50%) translateZ(0);
+    /* Create isolated stacking context */
+    isolation: isolate;
 }
 
 .currency-mark.dirham-mark {
@@ -567,11 +609,18 @@ body {
     height: 100%;
     filter: brightness(0.7) contrast(0.7);
     transition: all 0.3s ease-in-out;
+    /* Ensure icons are isolated from scroll interference */
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    /* Prevent any scroll-related interference */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 @keyframes fountain-rise {
     0% {
-        transform: translateX(-50%) translateY(0) scale(0.5) rotate(0deg);
+        transform: translateX(-50%) translateY(0) scale(0.5) rotate(0deg) translateZ(0);
         opacity: 0;
     }
     20% {
@@ -581,7 +630,7 @@ body {
         opacity: var(--opacity, 0.06);
     }
     100% {
-        transform: translateX(-50%) translateY(-140vh) scale(1.6) rotate(360deg);
+        transform: translateX(-50%) translateY(-140vh) scale(1.6) rotate(360deg) translateZ(0);
         opacity: 0;
     }
 }
