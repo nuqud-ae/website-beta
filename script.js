@@ -104,27 +104,55 @@ document.addEventListener('DOMContentLoaded', function() {
         const body = document.body;
         const container = document.querySelector('.container');
         const viewportHeight = window.innerHeight;
-        const containerHeight = container.scrollHeight;
         const isMobile = window.innerWidth <= 768;
         
-        // On mobile, always check for overflow
-        // On desktop, only enable if there's significant overflow
-        const overflowThreshold = isMobile ? 0 : 50; // 50px threshold for desktop
+        // Since we use absolute positioning, check if any content actually extends beyond viewport
+        const logo = document.querySelector('.logo');
+        const abstractGraphic = document.querySelector('.abstract-graphic');
+        const comingSoon = document.querySelector('.coming-soon');
+        const contactSection = document.querySelector('.contact-section');
         
-        if (containerHeight > (viewportHeight + overflowThreshold)) {
+        // Get the actual positions of our elements
+        const logoBottom = logo ? logo.getBoundingClientRect().bottom : 0;
+        const abstractBottom = abstractGraphic ? abstractGraphic.getBoundingClientRect().bottom : 0;
+        const comingSoonBottom = comingSoon ? comingSoon.getBoundingClientRect().bottom : 0;
+        const contactBottom = contactSection ? contactSection.getBoundingClientRect().bottom : 0;
+        
+        // Find the lowest positioned element
+        const maxBottom = Math.max(logoBottom, abstractBottom, comingSoonBottom, contactBottom);
+        
+        // Check if any content extends beyond the viewport
+        const contentOverflows = maxBottom > viewportHeight;
+        
+        // On mobile, be more lenient with overflow detection
+        // On desktop, only enable if there's clear overflow
+        const shouldEnableScroll = isMobile ? contentOverflows : (contentOverflows && (maxBottom > viewportHeight + 20));
+        
+        if (shouldEnableScroll) {
             // Content overflows - enable scrolling
             body.classList.remove('scroll-disabled');
             body.classList.add('scroll-enabled');
             container.classList.remove('scroll-not-needed');
             container.classList.add('scroll-needed');
+            console.log('Scroll enabled - content overflows viewport');
         } else {
             // Content fits - disable scrolling
             body.classList.remove('scroll-enabled');
             body.classList.add('scroll-disabled');
             container.classList.remove('scroll-needed');
             container.classList.add('scroll-not-needed');
+            console.log('Scroll disabled - content fits viewport');
         }
+        
+        // Debug info
+        console.log('Viewport height:', viewportHeight);
+        console.log('Max content bottom:', maxBottom);
+        console.log('Content overflows:', contentOverflows);
+        console.log('Is mobile:', isMobile);
     }
+    
+    // Force initial scroll state - disabled by default
+    document.body.classList.add('scroll-disabled');
     
     // Check scroll need on load
     checkScrollNeeded();
@@ -138,4 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Check scroll need after animations complete
     setTimeout(checkScrollNeeded, 2500); // After all animations finish
+    
+    // Additional check after a short delay to ensure proper detection
+    setTimeout(checkScrollNeeded, 100);
 });

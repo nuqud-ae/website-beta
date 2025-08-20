@@ -552,14 +552,19 @@ body {
 
 /* Smart scroll detection classes */
 body.scroll-enabled {
-    overflow-y: auto;
+    overflow-y: auto !important;
     /* Smooth scrollbar appearance */
     scrollbar-width: thin;
     scrollbar-color: rgba(0, 128, 128, 0.3) transparent;
 }
 
 body.scroll-disabled {
-    overflow-y: hidden;
+    overflow-y: hidden !important;
+}
+
+/* Force initial state - no scrolling by default */
+body:not(.scroll-enabled) {
+    overflow-y: hidden !important;
 }
 
 /* Webkit scrollbar styling */
