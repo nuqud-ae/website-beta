@@ -705,17 +705,22 @@ body {
     }
     15% {
         opacity: 0;
-        transform: translateX(-50%) translateY(-20vh) scale(0.8) rotate(90deg) translateZ(0);
+        transform: translateX(-50%) translateY(-15vh) scale(0.8) rotate(90deg) translateZ(0);
     }
     25% {
         opacity: var(--opacity, 0.06);
-        transform: translateX(-50%) translateY(-40vh) scale(1.0) rotate(180deg) translateZ(0);
+        transform: translateX(-50%) translateY(-25vh) scale(1.0) rotate(0deg) translateZ(0);
+    }
+    50% {
+        opacity: var(--opacity, 0.06);
+        transform: translateX(-50%) translateY(-50vh) scale(1.2) rotate(0deg) translateZ(0);
     }
     80% {
         opacity: var(--opacity, 0.06);
+        transform: translateX(-50%) translateY(-80vh) scale(1.4) rotate(180deg) translateZ(0);
     }
     100% {
-        transform: translateX(-50%) translateY(-140vh) scale(1.6) rotate(360deg) translateZ(0);
+        transform: translateX(-50%) translateY(-120vh) scale(1.6) rotate(360deg) translateZ(0);
         opacity: 0;
     }
 }
