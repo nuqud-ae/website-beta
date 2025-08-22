@@ -1,3 +1,362 @@
+// Performance Monitoring & Metrics
+class PerformanceMonitor {
+    constructor() {
+        this.metrics = {};
+        this.startTime = performance.now();
+        this.setupMetrics();
+    }
+    
+    setupMetrics() {
+        // Core Web Vitals tracking
+        this.observeLCP(); // Largest Contentful Paint
+        this.observeFID(); // First Input Delay
+        this.observeCLS(); // Cumulative Layout Shift
+        this.observeFCP(); // First Contentful Paint
+        
+        // Custom performance metrics
+        this.trackResourceTiming();
+        this.trackAnimationPerformance();
+    }
+    
+    observeLCP() {
+        new PerformanceObserver((entryList) => {
+            const entries = entryList.getEntries();
+            const lastEntry = entries[entries.length - 1];
+            this.metrics.lcp = lastEntry.startTime;
+        }).observe({entryTypes: ['largest-contentful-paint']});
+    }
+    
+    observeFID() {
+        new PerformanceObserver((entryList) => {
+            const firstInput = entryList.getEntries()[0];
+            if (firstInput) {
+                this.metrics.fid = firstInput.processingStart - firstInput.startTime;
+            }
+        }).observe({entryTypes: ['first-input']});
+    }
+    
+    observeCLS() {
+        new PerformanceObserver((entryList) => {
+            for (const entry of entryList.getEntries()) {
+                if (!entry.hadRecentInput) {
+                    this.metrics.cls = (this.metrics.cls || 0) + entry.value;
+                }
+            }
+        }).observe({entryTypes: ['layout-shift']});
+    }
+    
+    observeFCP() {
+        new PerformanceObserver((entryList) => {
+            const entries = entryList.getEntries();
+            if (entries.length > 0) {
+                this.metrics.fcp = entries[0].startTime;
+            }
+        }).observe({entryTypes: ['paint']});
+    }
+    
+    trackResourceTiming() {
+        window.addEventListener('load', () => {
+            const resources = performance.getEntriesByType('resource');
+            this.metrics.resourceCount = resources.length;
+            this.metrics.totalTransferSize = resources.reduce((sum, r) => sum + (r.transferSize || 0), 0);
+        });
+    }
+    
+    trackAnimationPerformance() {
+        let animationFrameId;
+        let frameCount = 0;
+        let lastTime = performance.now();
+        
+        const measureFPS = (currentTime) => {
+            frameCount++;
+            if (currentTime - lastTime >= 1000) {
+                this.metrics.averageFPS = Math.round((frameCount * 1000) / (currentTime - lastTime));
+                frameCount = 0;
+                lastTime = currentTime;
+            }
+            animationFrameId = requestAnimationFrame(measureFPS);
+        };
+        
+        requestAnimationFrame(measureFPS);
+        
+        // Stop measuring after 10 seconds
+        setTimeout(() => {
+            cancelAnimationFrame(animationFrameId);
+        }, 10000);
+    }
+    
+    reportMetrics() {
+        console.group('🚀 Performance Metrics');
+        console.log('LCP (Largest Contentful Paint):', this.metrics.lcp?.toFixed(2) + 'ms');
+        console.log('FCP (First Contentful Paint):', this.metrics.fcp?.toFixed(2) + 'ms');
+        console.log('FID (First Input Delay):', this.metrics.fid?.toFixed(2) + 'ms');
+        console.log('CLS (Cumulative Layout Shift):', this.metrics.cls?.toFixed(4));
+        console.log('Average FPS:', this.metrics.averageFPS);
+        console.log('Resources Loaded:', this.metrics.resourceCount);
+        console.log('Total Transfer Size:', (this.metrics.totalTransferSize / 1024).toFixed(2) + 'KB');
+        console.groupEnd();
+    }
+}
+
+// Initialize performance monitoring
+const performanceMonitor = new PerformanceMonitor();
+
+// Efficient Loading States Manager
+class LoadingStateManager {
+    constructor() {
+        this.loadedResources = new Set();
+        this.requiredResources = ['logo.png', 'logo-arabic.png', 'styles.css', 'script.js'];
+        this.setupLoadingIndicators();
+        this.monitorResourceLoading();
+    }
+    
+    setupLoadingIndicators() {
+        // Show minimal loading state while critical resources load
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.6s ease-out';
+        
+        // Add loading class for potential skeleton screens
+        document.documentElement.classList.add('loading');
+    }
+    
+    monitorResourceLoading() {
+        // Track resource loading progress
+        const observer = new PerformanceObserver((list) => {
+            list.getEntries().forEach((entry) => {
+                if (entry.name.includes(window.location.origin)) {
+                    const resourceName = entry.name.split('/').pop();
+                    this.loadedResources.add(resourceName);
+                    this.checkLoadingComplete();
+                }
+            });
+        });
+        observer.observe({entryTypes: ['resource']});
+        
+        // Fallback: Remove loading state after maximum wait time
+        setTimeout(() => this.completeLoading(), 2000);
+    }
+    
+    checkLoadingComplete() {
+        const allResourcesLoaded = this.requiredResources.every(resource => 
+            this.loadedResources.has(resource)
+        );
+        
+        if (allResourcesLoaded) {
+            this.completeLoading();
+        }
+    }
+    
+    completeLoading() {
+        // Smooth transition from loading to loaded state
+        document.documentElement.classList.remove('loading');
+        document.documentElement.classList.add('loaded');
+        
+        requestAnimationFrame(() => {
+            document.body.style.opacity = '1';
+        });
+        
+        // Trigger custom loading complete event
+        window.dispatchEvent(new CustomEvent('loadingComplete'));
+    }
+}
+
+// Initialize loading state management
+const loadingManager = new LoadingStateManager();
+
+// Advanced Caching Strategies
+class CacheManager {
+    constructor() {
+        this.cacheVersion = '1.0.0';
+        this.setupServiceWorker();
+        this.optimizeImageCaching();
+    }
+    
+    setupServiceWorker() {
+        // Register service worker for advanced caching (production ready)
+        if ('serviceWorker' in navigator) {
+            const swContent = this.generateServiceWorkerCode();
+            const blob = new Blob([swContent], { type: 'application/javascript' });
+            const swUrl = URL.createObjectURL(blob);
+            
+            navigator.serviceWorker.register(swUrl)
+                .then(registration => {
+                    console.log('SW registered:', registration);
+                })
+                .catch(error => {
+                    console.log('SW registration failed:', error);
+                });
+        }
+    }
+    
+    generateServiceWorkerCode() {
+        return `
+const CACHE_NAME = 'nuqud-v${this.cacheVersion}';
+const ASSETS = [
+    '/',
+    '/styles.css',
+    '/script.js',
+    '/logo.png',
+    '/logo-arabic.png',
+    '/favicon.png'
+];
+
+self.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then(cache => cache.addAll(ASSETS))
+    );
+});
+
+self.addEventListener('fetch', (event) => {
+    event.respondWith(
+        caches.match(event.request)
+            .then(response => response || fetch(event.request))
+    );
+});
+        `;
+    }
+    
+    optimizeImageCaching() {
+        // Preload and cache images efficiently
+        const imagesToCache = [
+            'logo.png',
+            'logo-arabic.png',
+            'favicon.png'
+        ];
+        
+        imagesToCache.forEach(src => {
+            const img = new Image();
+            img.loading = 'eager';
+            img.decoding = 'async';
+            img.src = src;
+        });
+    }
+    
+    clearOldCaches() {
+        if ('caches' in window) {
+            caches.keys().then(names => {
+                names.forEach(name => {
+                    if (name !== `nuqud-v${this.cacheVersion}`) {
+                        caches.delete(name);
+                    }
+                });
+            });
+        }
+    }
+}
+
+// Initialize cache management
+const cacheManager = new CacheManager();
+
+// Professional Focus Management
+class FocusManager {
+    constructor() {
+        this.focusableElements = [
+            '.logo-icon',
+            '.logo-arabic', 
+            '.abstract-graphic',
+            '.contact-link'
+        ];
+        this.currentFocusIndex = -1;
+        this.setupFocusManagement();
+        this.setupAccessibilityFeatures();
+    }
+    
+    setupFocusManagement() {
+        // Enhanced keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'Tab':
+                    this.handleTabNavigation(e);
+                    break;
+                case 'Escape':
+                    this.resetAllStates();
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    this.focusFirst();
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    this.focusLast();
+                    break;
+            }
+        });
+        
+        // Focus visible management
+        document.addEventListener('mousedown', () => {
+            document.body.classList.add('mouse-user');
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                document.body.classList.remove('mouse-user');
+            }
+        });
+    }
+    
+    setupAccessibilityFeatures() {
+        // Reduced motion preferences
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.style.setProperty('--duration-fast', '0.01s');
+            document.documentElement.style.setProperty('--duration-normal', '0.01s');
+            document.documentElement.style.setProperty('--duration-slow', '0.01s');
+            document.documentElement.style.setProperty('--duration-slower', '0.01s');
+            document.documentElement.style.setProperty('--duration-slowest', '0.01s');
+        }
+        
+        // High contrast mode detection
+        if (window.matchMedia('(prefers-contrast: high)').matches) {
+            document.documentElement.classList.add('high-contrast');
+        }
+    }
+    
+    handleTabNavigation(e) {
+        const focusable = document.querySelectorAll(this.focusableElements.join(', '));
+        const currentFocus = document.activeElement;
+        const currentIndex = Array.from(focusable).indexOf(currentFocus);
+        
+        if (e.shiftKey) {
+            // Backwards
+            if (currentIndex <= 0) {
+                e.preventDefault();
+                focusable[focusable.length - 1].focus();
+            }
+        } else {
+            // Forwards
+            if (currentIndex >= focusable.length - 1) {
+                e.preventDefault();
+                focusable[0].focus();
+            }
+        }
+    }
+    
+    focusFirst() {
+        const firstElement = document.querySelector(this.focusableElements[0]);
+        if (firstElement) firstElement.focus();
+    }
+    
+    focusLast() {
+        const lastElement = document.querySelector(this.focusableElements[this.focusableElements.length - 1]);
+        if (lastElement) lastElement.focus();
+    }
+    
+    resetAllStates() {
+        // Reset animations and states
+        document.querySelectorAll('.abstract-graphic').forEach(el => {
+            el.style.animationPlayState = 'running';
+        });
+        
+        // Clear focus
+        if (document.activeElement && document.activeElement.blur) {
+            document.activeElement.blur();
+        }
+    }
+}
+
+// Initialize focus management
+const focusManager = new FocusManager();
+
 // Smooth animation sequence: ball moves up → logos fade in → text fades in → contact link appears
 document.addEventListener('DOMContentLoaded', function() {
     const logo = document.querySelector('.logo');
@@ -96,6 +455,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Enhanced interactive features
     addInteractiveFeatures();
+    
+    // Report performance metrics after animations complete
+    setTimeout(() => {
+        performanceMonitor.reportMetrics();
+    }, 3000);
     
     // Simple approach - no scrolling needed since all content fits in viewport
 });
