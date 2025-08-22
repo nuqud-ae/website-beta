@@ -37,8 +37,8 @@
         }
         
         .abstract-graphic {
-            width: 320px;
-            height: 320px;
+            width: 200px;
+            height: 200px;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -47,22 +47,22 @@
             align-items: center;
             justify-content: center;
             z-index: 20;
-            transition: all 2s ease-in-out;
+            transition: all 1.2s cubic-bezier(0.86, 0, 0.07, 1);
             cursor: pointer;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
         }
         
         .abstract-graphic::before {
             content: '';
             position: absolute;
-            width: 240px;
-            height: 240px;
+            width: 150px;
+            height: 150px;
             background: linear-gradient(135deg, #008080 0%, #006666 50%, #004d4d 100%);
             border-radius: 50%;
             box-shadow: 0 20px 40px rgba(0, 128, 128, 0.3), inset 0 10px 20px rgba(255, 255, 255, 0.2);
-            animation: float 6s ease-in-out infinite;
-            transition: all 2s ease-in-out;
+            animation: float 6s cubic-bezier(0.86, 0, 0.07, 1) infinite;
+            transition: all 1.2s cubic-bezier(0.86, 0, 0.07, 1);
             --glow-intensity: 0;
             will-change: transform, box-shadow;
         }
@@ -70,13 +70,13 @@
         .abstract-graphic::after {
             content: '';
             position: absolute;
-            width: 160px;
-            height: 160px;
+            width: 100px;
+            height: 100px;
             background: linear-gradient(45deg, #00a3a3 0%, #008080 100%);
             border-radius: 50%;
             box-shadow: 0 10px 20px rgba(0, 128, 128, 0.2), inset 0 5px 10px rgba(255, 255, 255, 0.3);
-            animation: float 6s ease-in-out infinite reverse;
-            transition: all 2s ease-in-out;
+            animation: float 6s cubic-bezier(0.86, 0, 0.07, 1) infinite reverse;
+            transition: all 1.2s cubic-bezier(0.86, 0, 0.07, 1);
             --glow-intensity: 0;
             will-change: transform, box-shadow;
         }
