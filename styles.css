@@ -461,42 +461,27 @@ body {
 /* Ensure contact link is always visible */
 .contact-link {
     display: inline-block;
-    padding: var(--spacing-sm) var(--spacing-lg);
-    border-radius: 20px;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    line-height: var(--line-height-normal);
-    letter-spacing: var(--letter-spacing-wide);
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.025em;
     text-decoration: none;
     color: #008080;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 128, 128, 0.3);
-    box-shadow: var(--shadow-subtle);
-    filter: none;
-    transition: all var(--duration-normal) var(--ease-out-quint);
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(0, 128, 128, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
     position: relative;
     text-shadow: none;
-    font-family: 'Eastman Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    min-width: var(--touch-target-min);
-    min-height: var(--touch-target-min);
-    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    min-width: 44px;
+    min-height: 44px;
+    box-sizing: border-box;
 }
 
-.contact-link::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: radial-gradient(circle, rgba(0, 128, 128, 0.1) 0%, transparent 70%);
-    transition: all var(--duration-normal) var(--ease-out-quint);
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    z-index: -1;
-}
+/* Removed complex pseudo-elements that caused mobile issues */
 
 /* Extra small mobile devices */
 @media (max-width: 480px) {
@@ -533,35 +518,20 @@ body {
 /* Removed duplicate contact-link rule to prevent conflicts */
 
 .contact-link:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(0, 128, 128, 0.5);
-    box-shadow: var(--shadow-moderate);
-    transform: var(--state-hover-lift) scale(1.02);
-    transition: all var(--duration-fast) var(--ease-out-elastic);
-}
-
-.contact-link:hover::before {
-    width: 100px;
-    height: 100px;
+    background: rgba(255, 255, 255, 1);
+    border-color: rgba(0, 128, 128, 0.6);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
 }
 
 .contact-link:active {
-    transform: var(--state-active-press);
-    box-shadow: var(--shadow-subtle);
-    transition: all var(--duration-fast) var(--ease-out-quint);
+    transform: translateY(0px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .contact-link:focus {
     outline: none;
-    box-shadow: var(--shadow-moderate), var(--state-focus-ring);
-}
-
-.contact-link:focus:not(:focus-visible) {
-    box-shadow: var(--shadow-moderate);
-}
-
-.contact-link:focus-visible {
-    box-shadow: var(--shadow-moderate), var(--state-focus-ring);
+    box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.3);
 }
 
 .coming-soon {
@@ -591,27 +561,10 @@ body {
     letter-spacing: var(--letter-spacing-tight);
     color: #2c3e50;
     margin: 0 0 0.5rem 0;
-    font-family: 'Eastman Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    position: relative;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-.coming-soon h1::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #008080, transparent);
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity var(--duration-slow) var(--ease-out-quint);
-}
-
-.coming-soon.fade-in h1::after {
-    opacity: 1;
-}
+/* Removed decorative underline that caused blue line issue */
 
 /* Responsive design with consistent proportional spacing */
 @media (max-width: 768px) {

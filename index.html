@@ -51,6 +51,12 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
+            /* Prevent FOUC - ensure elements start hidden */
+        }
+        
+        /* Ensure all elements start hidden to prevent flash */
+        .logo, .coming-soon, .contact-section {
+            opacity: 0;
         }
         
         .container {

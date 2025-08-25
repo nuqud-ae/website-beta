@@ -111,10 +111,7 @@ class LoadingStateManager {
     }
     
     setupLoadingIndicators() {
-        // Show minimal loading state while critical resources load
-        document.body.style.opacity = '0';
-        document.body.style.transition = 'opacity 0.6s ease-out';
-        
+        // Don't hide body - causes FOUC
         // Add loading class for potential skeleton screens
         document.documentElement.classList.add('loading');
     }
@@ -150,10 +147,6 @@ class LoadingStateManager {
         // Smooth transition from loading to loaded state
         document.documentElement.classList.remove('loading');
         document.documentElement.classList.add('loaded');
-        
-        requestAnimationFrame(() => {
-            document.body.style.opacity = '1';
-        });
         
         // Trigger custom loading complete event
         window.dispatchEvent(new CustomEvent('loadingComplete'));
