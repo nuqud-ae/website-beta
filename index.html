@@ -56,7 +56,14 @@
         
         /* Ensure all elements start hidden to prevent flash */
         .logo, .coming-soon, .contact-section {
-            opacity: 0;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+        
+        /* Hide currency watermarks initially */
+        .currency-watermarks {
+            opacity: 0 !important;
+            visibility: hidden !important;
         }
         
         .container {

@@ -405,7 +405,9 @@ body {
     left: 50%;
     transform: translateX(-50%);
     z-index: 40;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     opacity: 1; /* Visible by default, JS will handle animation */
     transition: all var(--duration-normal) var(--ease-out-quint);
 }
@@ -460,7 +462,9 @@ body {
 
 /* Ensure contact link is always visible */
 .contact-link {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 12px 24px;
     border-radius: 25px;
     font-size: 14px;
@@ -469,9 +473,11 @@ body {
     letter-spacing: 0.025em;
     text-decoration: none;
     color: #008080;
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid rgba(0, 128, 128, 0.4);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 128, 128, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 128, 128, 0.15);
     transition: all 0.3s ease;
     position: relative;
     text-shadow: none;
@@ -479,6 +485,7 @@ body {
     min-width: 44px;
     min-height: 44px;
     box-sizing: border-box;
+    text-align: center;
 }
 
 /* Removed complex pseudo-elements that caused mobile issues */
@@ -518,9 +525,9 @@ body {
 /* Removed duplicate contact-link rule to prevent conflicts */
 
 .contact-link:hover {
-    background: rgba(255, 255, 255, 1);
-    border-color: rgba(0, 128, 128, 0.6);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(0, 128, 128, 0.5);
+    box-shadow: 0 6px 25px rgba(0, 128, 128, 0.25);
     transform: translateY(-2px);
 }
 
