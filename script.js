@@ -441,6 +441,11 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             if (contactLink) {
                 contactLink.style.opacity = '1';
+                // Also animate the contact section container
+                const contactSection = document.querySelector('.contact-section');
+                if (contactSection) {
+                    contactSection.style.opacity = '1';
+                }
             }
         }, 1900); // Reduced from 2200ms to 1900ms (300ms faster)
         
